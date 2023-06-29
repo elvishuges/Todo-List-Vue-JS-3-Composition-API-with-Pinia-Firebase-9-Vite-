@@ -34,19 +34,19 @@
     </v-app-bar>
 
     <v-main>
-      <form-comment />
+      <kaban-page />
     </v-main>
   </v-app>
 </template>
 
 <script>
-import FormComment from './components/FormComment.vue';
+import KabanPage from './views/KabanPage.vue';
 
 export default {
   name: 'App',
 
   components: {
-    FormComment,
+    KabanPage,
   },
 };
 </script>

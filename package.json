@@ -1,5 +1,5 @@
 {
-  "name": "post-comments",
+  "name": "todo-list-kanban",
   "version": "0.1.0",
   "private": true,
   "scripts": {
