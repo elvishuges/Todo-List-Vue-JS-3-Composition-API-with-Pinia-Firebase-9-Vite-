@@ -2,7 +2,7 @@
   <v-form @submit.prevent="handleSubmit('toDo')">
     <v-text-field
       v-model="title"
-      label="título"
+      label="Título"
       variant="outlined"
     ></v-text-field>
     <v-text-field
@@ -30,6 +30,7 @@ function handleSubmit() {
   validateFields();
   emits('submit', payload);
 }
+
 function validateFields() {
   console.log(title.value);
 }

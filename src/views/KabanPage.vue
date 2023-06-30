@@ -6,36 +6,14 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="4">
-        <v-card color="#d5d5d5">
-          <v-card-title class="text-center">Fazer</v-card-title>
-          <v-card-text>
-            <todo-item-card
-              v-for="(todo, index) in todos"
-              :key="index"
-              :title="todo.title"
-              :description="todo.description"
-              @remove="removeItemTodo(index)"
-              :index="index"
-            />
-          </v-card-text>
-        </v-card>
+      <v-col cols="4" class="drop-zone">
+        <todo-item-list :items="todo" @onDropCardItem="onDropCardItemTodo" />
       </v-col>
-      <v-col cols="4">
-        <v-card>
-          <v-card-title class="text-center">Fazendo</v-card-title>
-          <v-card-text>
-            <!-- Lista de tarefas em andamento -->
-          </v-card-text>
-        </v-card>
+      <v-col cols="4" class="drop-zone">
+        <todo-item-list :items="doing" @onDropCardItem="onDropCardItemDoing" />
       </v-col>
-      <v-col cols="4">
-        <v-card>
-          <v-card-title class="text-center">Feito</v-card-title>
-          <v-card-text>
-            <!-- Lista de tarefas concluídas -->
-          </v-card-text>
-        </v-card>
+      <v-col cols="4" class="drop-zone">
+        <todo-item-list :items="done" @onDropCardItem="onDropCardItemDone" />
       </v-col>
     </v-row>
   </v-container>
@@ -44,23 +22,31 @@
 <script setup>
 import { ref } from 'vue';
 
-import TodoItemCard from '@/components/TodoItemCard.vue';
 import TodoItemForm from '@/components/TodoItemForm.vue';
+import TodoItemList from '@/components/TodoItemList.vue';
 
-const todos = ref([]);
+const todo = ref([]);
+const doing = ref([]);
+const done = ref([]);
 
 function handleFormSubmit(payload) {
   console.log('handleFormSubmit', payload);
-  addItemTodo(payload); // Adiciona um novo item à lista de tarefas
+  addItemTodo(payload);
 }
 
 function addItemTodo(newTodo) {
-  todos.value.push(newTodo); // Adiciona o novo item na lista de tarefas
+  todo.value.push(newTodo);
 }
 
-function removeItemTodo(index) {
-  todos.value.splice(index, 1); // Remove o item correspondente ao índice da lista de tarefas
+function onDropCardItemTodo(payload) {
+  console.log('111', payload);
+}
+function onDropCardItemDone(payload) {
+  console.log('222', payload);
+}
+function onDropCardItemDoing(payload) {
+  console.log('333', payload);
 }
 </script>
 
-<style></style>
+<style scoped></style>
