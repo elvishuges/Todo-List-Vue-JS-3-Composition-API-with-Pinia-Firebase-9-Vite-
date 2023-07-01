@@ -2,6 +2,7 @@
   <div
     draggable="true"
     @dragstart="dragStart"
+    @dragend="draggableEnd"
     class="todo-item-card-container"
     :id="`todo-item-card${props.index}`"
   >
@@ -28,7 +29,7 @@ const props = defineProps({
   title: String,
   description: String,
   index: Number,
-  columnName: String,
+  columnIdentifier: String,
 });
 
 function handleRemove() {
@@ -38,21 +39,24 @@ function handleRemove() {
 function dragStart(event) {
   let obj = JSON.stringify({
     cardIndex: props.index,
-    cardColumnName: props.columnName,
+    originColumnName: props.columnIdentifier,
   });
 
   event.dataTransfer.setData('text/plain', obj);
+}
+
+function draggableEnd(event) {
+  console.log('dragEnd');
+  event.dataTransfer?.clearData();
 }
 </script>
 
 <style lang="css" scoped>
 .todo-item-card-container {
   cursor: move;
-  transition: 100ms;
 }
 
 .todo-item-card-container:hover {
-  transform: scale(1.02);
   border-color: red;
 }
 </style>

@@ -1,17 +1,14 @@
 <template>
-  <div
-    class="todo-item-list-content"
-    draggable="true"
-    @dragstart="dragStart"
-    @dragover.prevent="dragOver"
-    @drop="drop"
-  >
-    <v-card class="todo-item-list-card">
-      <v-card-title class="text-center">{{ listTitle }}</v-card-title>
+  <div class="todo-item-list-content" @dragover.prevent="dragOver" @drop="drop">
+    <v-card
+      class="todo-item-list-card"
+      :style="{ background: props.backgroundColor }"
+    >
+      <v-card-title class="text-center">{{ title }}</v-card-title>
       <v-card-text>
         <!-- Lista de tarefas em andamento -->
         <todo-item-card
-          columnName="todo"
+          :columnIdentifier="columnIdentifier"
           v-for="(item, index) in props.items"
           :key="index"
           :title="item.title"
@@ -25,7 +22,7 @@
 </template>
 
 <script setup>
-import { defineEmits } from 'vue';
+import { defineEmits, computed } from 'vue';
 import TodoItemCard from '@/components/TodoItemCard.vue';
 const emits = defineEmits(['onDropCardItem']);
 
@@ -33,7 +30,15 @@ import { defineProps } from 'vue';
 
 const props = defineProps({
   items: Array,
-  listTitle: String,
+  title: String,
+  backgroundColor: {
+    type: String,
+  },
+  columnIdentifier: {
+    type: String,
+    required: true,
+    default: '',
+  },
 });
 
 function removeItemTodo(index) {
@@ -44,30 +49,17 @@ function parentCall(index) {
 }
 
 function drop(event) {
-  console.log('ev', event.dataTransfer.getData('text/plain'));
   event.preventDefault();
   if (event.dataTransfer.getData('text/plain')) {
-    const dragadObj = JSON.parse(event.dataTransfer.getData('text/plain'));
-    emits('onDropCardItem', dragadObj);
+    const dropedCard = JSON.parse(event.dataTransfer.getData('text/plain'));
+    emits('onDropCardItem', dropedCard);
   }
-}
-
-function dragStart(event) {
-  console.log('111');
-  let obj = JSON.stringify({
-    cardIndex: props.index,
-    cardColumnName: props.columnName,
-  });
-  console.log('obj', obj);
-
-  event.dataTransfer.setData('text/plain', obj);
 }
 </script>
 
 <style lang="scss" scoped>
 .todo-item-list-card {
   min-height: 400px;
-  background: rgb(218, 147, 147);
-  color: aliceblue;
+  color: rgb(57, 57, 58);
 }
 </style>
