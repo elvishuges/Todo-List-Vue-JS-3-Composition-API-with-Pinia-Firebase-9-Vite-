@@ -4,7 +4,12 @@
       class="todo-item-list-card"
       :style="{ background: props.backgroundColor }"
     >
-      <v-card-title class="text-center">{{ title }}</v-card-title>
+      <v-card-title class="text-center">
+        <div class="information">{{ itensNumbers }}</div>
+        <div class="content">
+          {{ title }}
+        </div></v-card-title
+      >
       <v-card-text>
         <!-- Lista de tarefas em andamento -->
         <todo-item-card
@@ -41,6 +46,10 @@ const props = defineProps({
   },
 });
 
+const itensNumbers = computed(() => {
+  return props.items.length;
+});
+
 function drop(event) {
   event.preventDefault();
   if (event.dataTransfer.getData('text/plain')) {
@@ -54,5 +63,14 @@ function drop(event) {
 .todo-item-list-card {
   min-height: 400px;
   color: rgb(57, 57, 58);
+}
+
+.information {
+  position: absolute;
+  top: 0px;
+  right: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 12px;
 }
 </style>

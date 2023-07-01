@@ -38,7 +38,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
 import TodoItemForm from '@/components/TodoItemForm.vue';
 import TodoItemList from '@/components/TodoItemList.vue';
