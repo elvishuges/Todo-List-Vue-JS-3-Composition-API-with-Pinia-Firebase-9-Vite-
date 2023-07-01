@@ -48,7 +48,6 @@ const doing = ref([]);
 const done = ref([]);
 
 function handleFormSubmit(payload) {
-  console.log('handleFormSubmit', payload);
   addItemTodo(payload);
 }
 
@@ -89,7 +88,6 @@ function onDropCardItemDoing(payload) {
 }
 
 function removeAndGetItemFromArray(index, from) {
-  console.log('aqui', from);
   let item = null;
   if (from === 'todo') {
     item = todo.value.splice(index, 1)[0];

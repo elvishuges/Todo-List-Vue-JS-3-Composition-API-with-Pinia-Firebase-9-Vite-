@@ -41,13 +41,6 @@ const props = defineProps({
   },
 });
 
-function removeItemTodo(index) {
-  console.log(index);
-}
-function parentCall(index) {
-  console.log(index);
-}
-
 function drop(event) {
   event.preventDefault();
   if (event.dataTransfer.getData('text/plain')) {
