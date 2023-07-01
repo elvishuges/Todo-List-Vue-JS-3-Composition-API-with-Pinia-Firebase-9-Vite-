@@ -46,7 +46,6 @@ function dragStart(event) {
 }
 
 function draggableEnd(event) {
-  console.log('dragEnd');
   event.dataTransfer?.clearData();
 }
 </script>

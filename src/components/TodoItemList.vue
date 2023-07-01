@@ -39,6 +39,7 @@ const props = defineProps({
   backgroundColor: {
     type: String,
   },
+
   columnIdentifier: {
     type: String,
     required: true,

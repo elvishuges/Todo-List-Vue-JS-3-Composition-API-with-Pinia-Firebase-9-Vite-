@@ -1,6 +1,7 @@
 <template>
   <v-form @submit.prevent="handleSubmit('toDo')">
     <v-text-field
+      autofocus
       v-model="title"
       label="Título"
       variant="outlined"
@@ -27,12 +28,7 @@ function handleSubmit() {
     title: title.value,
     description: description.value,
   };
-  validateFields();
   emits('submit', payload);
-}
-
-function validateFields() {
-  console.log(title.value);
 }
 </script>
 
