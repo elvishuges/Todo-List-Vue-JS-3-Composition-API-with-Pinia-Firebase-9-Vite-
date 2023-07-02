@@ -10,8 +10,10 @@
         <todo-item-list
           :items="todo"
           title="Fazer"
-          columnIdentifier="todo"
           @onDropCardItem="onDropCardItemTodo"
+          @onRemoveItem="onRemoveItemTodo"
+          @Todo="TodoTodo"
+          columnIdentifier="todo"
           backgroundColor="#E2D6D8"
         />
       </v-col>
@@ -21,6 +23,8 @@
           title="Fazendo"
           columnIdentifier="doing"
           @onDropCardItem="onDropCardItemDoing"
+          @onRemoveItem="onRemoveItemDoing"
+          @Todo="TodoDoing"
           backgroundColor="#D6E2E8"
         />
       </v-col>
@@ -29,6 +33,8 @@
           :items="done"
           title="Feito"
           columnIdentifier="done"
+          @Todo="TodoDone"
+          @onRemoveItem="onRemoveItemDone"
           @onDropCardItem="onDropCardItemDone"
           backgroundColor="#7DA3D9"
         />
@@ -42,17 +48,27 @@ import { ref, computed } from 'vue';
 
 import TodoItemForm from '@/components/TodoItemForm.vue';
 import TodoItemList from '@/components/TodoItemList.vue';
+import useRemoveAndGetItemFromArray from './../composable/useRemoveAndGetItemFromArray';
 
-const todo = ref([]);
-const doing = ref([]);
-const done = ref([]);
+const { todo, doing, done, removeAndGetItemFromArray } =
+  useRemoveAndGetItemFromArray();
 
 function handleFormSubmit(payload) {
   addItemTodo(payload);
 }
 
 function addItemTodo(newTodo) {
-  todo.value.push(newTodo);
+  todo.push(newTodo);
+}
+
+function onRemoveItemTodo(index) {
+  todo.splice(index, 1)[0];
+}
+function onRemoveItemDoing(index) {
+  doing.splice(index, 1)[0];
+}
+function onRemoveItemDone(index) {
+  done.splice(index, 1)[0];
 }
 
 function onDropCardItemTodo(payload) {
@@ -62,7 +78,7 @@ function onDropCardItemTodo(payload) {
       payload.originColumnName
     );
 
-    todo.value.push(removed);
+    todo.push(removed);
   }
 }
 function onDropCardItemDone(payload) {
@@ -72,7 +88,7 @@ function onDropCardItemDone(payload) {
       payload.originColumnName
     );
 
-    done.value.push(removed);
+    done.push(removed);
   }
 }
 
@@ -83,22 +99,8 @@ function onDropCardItemDoing(payload) {
       payload.originColumnName
     );
 
-    doing.value.push(removed);
+    doing.push(removed);
   }
-}
-
-function removeAndGetItemFromArray(index, from) {
-  let item = null;
-  if (from === 'todo') {
-    item = todo.value.splice(index, 1)[0];
-  }
-  if (from === 'doing') {
-    item = doing.value.splice(index, 1)[0];
-  }
-  if (from === 'done') {
-    item = done.value.splice(index, 1)[0];
-  }
-  return item;
 }
 </script>
 

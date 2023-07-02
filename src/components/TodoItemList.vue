@@ -18,7 +18,7 @@
           :key="index"
           :title="item.title"
           :description="item.description"
-          @remove="removeItemTodo(index)"
+          @remove="onRemoveItem(index)"
           :index="index"
         ></todo-item-card>
       </v-card-text>
@@ -29,7 +29,7 @@
 <script setup>
 import { defineEmits, computed } from 'vue';
 import TodoItemCard from '@/components/TodoItemCard.vue';
-const emits = defineEmits(['onDropCardItem']);
+const emits = defineEmits(['onDropCardItem', 'onRemoveItem']);
 
 import { defineProps } from 'vue';
 
@@ -57,6 +57,10 @@ function drop(event) {
     const dropedCard = JSON.parse(event.dataTransfer.getData('text/plain'));
     emits('onDropCardItem', dropedCard);
   }
+}
+
+function onRemoveItem(index) {
+  emits('onRemoveItem', index);
 }
 </script>
 
