@@ -12,7 +12,6 @@
           title="Fazer"
           @onDropCardItem="onDropCardItemTodo"
           @onRemoveItem="onRemoveItemTodo"
-          @Todo="TodoTodo"
           columnIdentifier="todo"
           backgroundColor="#E2D6D8"
         />
@@ -24,7 +23,6 @@
           columnIdentifier="doing"
           @onDropCardItem="onDropCardItemDoing"
           @onRemoveItem="onRemoveItemDoing"
-          @Todo="TodoDoing"
           backgroundColor="#D6E2E8"
         />
       </v-col>
@@ -33,7 +31,6 @@
           :items="done"
           title="Feito"
           columnIdentifier="done"
-          @Todo="TodoDone"
           @onRemoveItem="onRemoveItemDone"
           @onDropCardItem="onDropCardItemDone"
           backgroundColor="#7DA3D9"
