@@ -1,5 +1,5 @@
 <template>
-  <div class="todo-item-list-content" @dragover.prevent="dragOver" @drop="drop">
+  <div class="todo-item-list-content" @dragover.prevent="dragOver" @drop="onDrop">
     <v-card
       class="todo-item-list-card"
       :style="{ background: props.backgroundColor }"
@@ -51,7 +51,7 @@ const itensNumbers = computed(() => {
   return props.items.length;
 });
 
-function drop(event) {
+function onDrop(event) {
   event.preventDefault();
   if (event.dataTransfer.getData('text/plain')) {
     const dropedCard = JSON.parse(event.dataTransfer.getData('text/plain'));

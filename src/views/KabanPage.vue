@@ -61,6 +61,7 @@ function addItemTodo(newTodo) {
 function onRemoveItemTodo(index) {
   todo.splice(index, 1)[0];
 }
+
 function onRemoveItemDoing(index) {
   doing.splice(index, 1)[0];
 }
