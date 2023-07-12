@@ -1,7 +1,13 @@
 <template>
   <v-app>
     <v-app-bar app color="primary" dark>
-      <div class="d-flex align-center pl-3">Vuejs 3 Kaban</div>
+      <div
+        style="cursor: pointer"
+        @click="router.push('/')"
+        class="d-flex align-center pl-3"
+      >
+        Vuejs 3 Kaban
+      </div>
 
       <v-spacer></v-spacer>
 
@@ -21,10 +27,8 @@
   </v-app>
 </template>
 
-<script>
-export default {
-  name: 'App',
+<script setup>
+import { useRouter } from 'vue-router';
 
-  components: {},
-};
+const router = useRouter();
 </script>

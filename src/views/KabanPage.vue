@@ -41,14 +41,28 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 
 import TodoItemForm from '@/components/TodoItemForm.vue';
 import TodoItemList from '@/components/TodoItemList.vue';
 import useRemoveAndGetItemFromArray from './../composable/useRemoveAndGetItemFromArray';
 
+import { useTodo } from '@/store/todo';
+
+const todoState = useTodo();
+
 const { todo, doing, done, removeAndGetItemFromArray } =
   useRemoveAndGetItemFromArray();
+
+watch(todo, async (newTodo, oldTodo) => {
+  todoState.updateTodoNumber();
+});
+watch(doing, async (newDoing, oldDoing) => {
+  todoState.updateDoingNumber();
+});
+watch(done, async (newDone, oldDoing) => {
+  todoState.updateDoneNumber();
+});
 
 function handleFormSubmit(payload) {
   addItemTodo(payload);
