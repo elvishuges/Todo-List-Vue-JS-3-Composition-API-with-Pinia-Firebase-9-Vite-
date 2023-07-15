@@ -8,14 +8,14 @@ export const useTodo = defineStore('todo', {
     title: 'My Todo Kaban',
   }),
   actions: {
-    updateTodoNumber() {
-      this.todoNumber = 1;
+    updateTodoNumber(payload) {
+      this.todoNumber = payload;
     },
-    updateDoingNumber() {
-      this.doingNumber = 2;
+    updateDoingNumber(payload) {
+      this.doingNumber = payload;
     },
-    updateDoneNumber() {
-      this.done = 2;
+    updateDoneNumber(payload) {
+      this.doneNumber = payload;
     },
   },
   getters: {

@@ -7,7 +7,7 @@ const routes = [
   { path: '/', name: 'Dashboard', component: DashBoard },
   { path: '/kaban', name: 'kaban', component: KabanPage },
   { path: '/home', name: 'home', component: HomePage },
-  { path: '/notes', name: 'MyNotes', component: MyNotes },
+  { path: '/notes', name: 'notes', component: MyNotes },
 ];
 
 export default routes;

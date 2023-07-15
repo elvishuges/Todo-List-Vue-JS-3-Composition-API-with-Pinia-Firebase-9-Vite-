@@ -55,13 +55,13 @@ const { todo, doing, done, removeAndGetItemFromArray } =
   useRemoveAndGetItemFromArray();
 
 watch(todo, async (newTodo, oldTodo) => {
-  todoState.updateTodoNumber();
+  todoState.updateTodoNumber(newTodo.length);
 });
 watch(doing, async (newDoing, oldDoing) => {
-  todoState.updateDoingNumber();
+  todoState.updateDoingNumber(newDoing.length);
 });
 watch(done, async (newDone, oldDoing) => {
-  todoState.updateDoneNumber();
+  todoState.updateDoneNumber(newDone.length);
 });
 
 function handleFormSubmit(payload) {
