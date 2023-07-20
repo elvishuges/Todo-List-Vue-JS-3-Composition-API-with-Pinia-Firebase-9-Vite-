@@ -17,6 +17,9 @@
         <v-btn @click="router.push('/kaban')" target="_blank" text>
           <span class="mr-2">Kaban</span>
         </v-btn>
+        <v-btn @click="router.push('/')" target="_blank" text>
+          <span class="mr-2">Home</span>
+        </v-btn>
       </div>
     </v-app-bar>
     <v-navigation-drawer v-model="drawer" location="top" temporary>
