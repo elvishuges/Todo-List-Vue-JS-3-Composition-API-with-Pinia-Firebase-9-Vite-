@@ -1,5 +1,5 @@
 <template>
-  <v-form @submit.prevent="handleSubmit('toDo')">
+  <v-form @submit.prevent="handleSubmit()">
     <v-text-field
       autofocus
       v-model="title"

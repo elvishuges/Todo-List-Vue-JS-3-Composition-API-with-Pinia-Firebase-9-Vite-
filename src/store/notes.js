@@ -1,8 +1,9 @@
 import { defineStore } from 'pinia';
 
-export const useNote = defineStore('notes', {
+export const useStoreNotes = defineStore('notes', {
   state: () => ({
     title: 'My Notes',
+    notes: [],
   }),
   actions: {
     updateNoteTitles(title) {

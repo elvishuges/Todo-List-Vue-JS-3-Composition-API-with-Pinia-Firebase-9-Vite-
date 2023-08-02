@@ -28,46 +28,48 @@
         </v-card-actions>
       </v-form>
     </v-sheet>
-    <div v-for="item in notes" :key="item.id">
-      <v-card class="mt-5">
-        <v-card-text>
-          <div>
-            {{ item.content }}
-          </div>
-        </v-card-text>
-
-        <v-card-actions>
-          <v-btn color="#5865f2"> Edit </v-btn>
-          <v-spacer />
-          <v-btn color="#5865f2"> Delete </v-btn>
-        </v-card-actions>
-      </v-card>
-    </div>
+    <Note
+      v-for="note in storeNotes.notes"
+      :note="note"
+      :key="note.id"
+      @deleteClicked="onDeleteNote"
+    />
   </v-container>
 </template>
 
 <script setup>
 // imports
 import { ref } from 'vue';
+import Note from './../components/Note.vue';
+import { useStoreNotes } from '@/store/notes';
 
 // notes
 
 const newNote = ref('');
 const notes = ref([]);
 const newNoteRef = ref([]);
+const storeNotes = useStoreNotes();
 
 function onAddNote() {
-  let currentDate = new Date().getTime,
+  let currentDate = new Date().getTime(),
     id = currentDate.toString();
 
   let note = {
     id,
     content: newNote.value,
   };
+  console.log('', note);
   notes.value.unshift(note);
   newNote.value = '';
   newNoteRef.value.focus();
 }
+
+// delete notes
+
+const onDeleteNote = (idNote) => {
+  console.log(idNote);
+  notes.value = notes.value.filter((note) => note.id !== idNote);
+};
 </script>
 
 <style lang="css" scoped>
