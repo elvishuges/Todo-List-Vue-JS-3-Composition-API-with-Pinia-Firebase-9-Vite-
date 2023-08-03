@@ -12,7 +12,7 @@
       </div>
 
       <v-card-actions>
-        <v-btn color="#5865f2"> Edit </v-btn>
+        <v-btn @click="editNote" color="#5865f2"> Edit </v-btn>
         <v-spacer />
         <v-btn @click="deleteNote" color="#5865f2"> Delete </v-btn>
       </v-card-actions>
@@ -23,7 +23,7 @@
 <script setup>
 import { defineProps } from 'vue';
 import { computed, defineEmits } from 'vue';
-const emits = defineEmits(['deleteClicked']);
+const emits = defineEmits(['deleteClicked', 'editClicked']);
 // props
 const props = defineProps({
   note: {
@@ -40,6 +40,9 @@ const characteresLength = computed(() => {
 
 const deleteNote = () => {
   emits('deleteClicked', props.note.id);
+};
+const editNote = () => {
+  emits('editClicked', props.note.id);
 };
 </script>
 

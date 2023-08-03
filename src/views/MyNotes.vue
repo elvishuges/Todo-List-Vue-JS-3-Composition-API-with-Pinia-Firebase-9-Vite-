@@ -1,38 +1,26 @@
 <template>
   <v-container>
-    <v-sheet>
-      <v-form @submit.prevent>
-        <v-textarea
-          v-model="newNote"
-          autofocus
-          ref="newNoteRef"
-          bg-color="grey-lighten-2"
-          color="#5865f2"
-          label="Adicionar Nota..."
-        ></v-textarea>
-        <v-card-actions>
-          <v-btn class="text-none text-subtitle-1" color="#5865f2">
-            Clear
-          </v-btn>
-          <v-spacer></v-spacer>
-          <v-btn
-            class="text-subtitle-1 white"
-            color="indigo-darken-3"
-            size="large"
-            :disabled="!newNote"
-            @click="onAddNote"
-            variant="flat"
-          >
-            Submit
-          </v-btn>
-        </v-card-actions>
-      </v-form>
-    </v-sheet>
+    <AddEditNote ref="addEditNoteRef" v-model="newNote">
+      <template #buttons>
+        <v-btn
+          class="text-subtitle-1 white"
+          color="indigo-darken-3"
+          size="large"
+          :disabled="!newNote"
+          @click="onAddNote"
+          variant="flat"
+        >
+          Add nova nota
+        </v-btn></template
+      >
+    </AddEditNote>
+
     <Note
       v-for="note in storeNotes.notes"
       :note="note"
       :key="note.id"
       @deleteClicked="onDeleteNote"
+      @editClicked="onEditClicked"
     />
   </v-container>
 </template>
@@ -40,35 +28,33 @@
 <script setup>
 // imports
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import Note from './../components/Note.vue';
+import AddEditNote from './../components/AddEditNote.vue';
 import { useStoreNotes } from '@/store/notes';
 
-// notes
+const router = useRouter();
 
+// notes
 const newNote = ref('');
 const notes = ref([]);
-const newNoteRef = ref([]);
+const addEditNoteRef = ref(null);
 const storeNotes = useStoreNotes();
 
 function onAddNote() {
-  let currentDate = new Date().getTime(),
-    id = currentDate.toString();
-
-  let note = {
-    id,
-    content: newNote.value,
-  };
-  console.log('', note);
-  notes.value.unshift(note);
+  storeNotes.addNote(newNote.value);
   newNote.value = '';
-  newNoteRef.value.focus();
+  addEditNoteRef.value.focusTextarea();
 }
 
 // delete notes
 
 const onDeleteNote = (idNote) => {
-  console.log(idNote);
-  notes.value = notes.value.filter((note) => note.id !== idNote);
+  storeNotes.deleteNote(idNote);
+};
+// edit note
+const onEditClicked = (idNote) => {
+  router.push({ name: 'editNote', params: { id: idNote } });
 };
 </script>
 
