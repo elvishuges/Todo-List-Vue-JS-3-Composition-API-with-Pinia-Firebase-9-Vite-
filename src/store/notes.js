@@ -9,6 +9,10 @@ export const useStoreNotes = defineStore('notes', {
     updateNoteTitles(title) {
       this.title = title;
     },
+    updateNote(noteId, noteContent) {
+      let noteIndex = this.notes.findIndex((note) => note.id === noteId);
+      this.notes[noteIndex].content = noteContent;
+    },
     addNote(newNoteContent) {
       console.log('newNoteContent', newNoteContent);
       let currentDate = new Date().getTime(),

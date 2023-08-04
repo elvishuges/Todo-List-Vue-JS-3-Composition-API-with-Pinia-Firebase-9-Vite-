@@ -22,7 +22,12 @@
         </v-btn>
       </div>
     </v-app-bar>
-    <v-navigation-drawer v-model="drawer" location="top" temporary>
+    <v-navigation-drawer
+      v-model="drawer"
+      location="top"
+      temporary
+      style="height: 180px"
+    >
       <v-list nav dense>
         <v-list-item
           @click="router.push(item.toRoute)"

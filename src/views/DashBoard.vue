@@ -2,7 +2,12 @@
   <v-container>
     <v-row dense>
       <v-col cols="4">
-        <v-card @click="goToKaban" color="#385F73" theme="dark">
+        <v-card
+          @click="goToKaban"
+          color="#385F73"
+          theme="dark"
+          style="height: 160px"
+        >
           <v-card-title class="text-h5">{{ todoState.title }} </v-card-title>
           <v-card-subtitle>Acompanhando Suas Tarefas</v-card-subtitle>
 
@@ -14,7 +19,12 @@
         </v-card>
       </v-col>
       <v-col cols="4">
-        <v-card @click="goToMyNotes" color="#385F73" theme="dark">
+        <v-card
+          @click="goToMyNotes"
+          color="#385F73"
+          theme="dark"
+          style="height: 160px"
+        >
           <v-card-title class="text-h5">{{ todoState.title }} </v-card-title>
           <v-card-subtitle>Acompanhando Suas Notas</v-card-subtitle>
           <v-card-text> </v-card-text>

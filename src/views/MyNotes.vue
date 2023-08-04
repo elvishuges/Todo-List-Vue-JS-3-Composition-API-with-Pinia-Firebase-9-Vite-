@@ -10,7 +10,7 @@
           @click="onAddNote"
           variant="flat"
         >
-          Add nova nota
+          Adicionar Nota
         </v-btn></template
       >
     </AddEditNote>

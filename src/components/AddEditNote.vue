@@ -9,7 +9,7 @@
           ref="addEditNoteTextArea"
           bg-color="grey-lighten-2"
           color="#5865f2"
-          label="Adicionar Nota..."
+          :label="placeholder"
         ></v-textarea>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -30,6 +30,15 @@ const props = defineProps({
   modelValue: {
     type: String,
     required: true,
+  },
+  bgColor: {
+    type: String,
+    default: 'success',
+    riquired: true,
+  },
+  placeholder: {
+    type: String,
+    default: 'Adicionar Nota...',
   },
 });
 

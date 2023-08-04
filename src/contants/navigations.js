@@ -7,4 +7,8 @@ export const navbarItens = [
     title: 'Kaban',
     toRoute: '/kaban',
   },
+  {
+    title: 'States',
+    toRoute: '/states',
+  },
 ];
