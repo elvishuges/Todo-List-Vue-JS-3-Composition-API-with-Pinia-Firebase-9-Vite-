@@ -27,11 +27,12 @@
 
 <script setup>
 // imports
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import Note from './../components/Note.vue';
 import AddEditNote from './../components/AddEditNote.vue';
 import { useStoreNotes } from '@/store/notes';
+import useWatchCharacters from './../composable/useWatchCharacters.js';
 
 const router = useRouter();
 
@@ -56,6 +57,8 @@ const onDeleteNote = (idNote) => {
 const onEditClicked = (idNote) => {
   router.push({ name: 'editNote', params: { id: idNote } });
 };
+
+useWatchCharacters(newNote);
 </script>
 
 <style lang="css" scoped>
