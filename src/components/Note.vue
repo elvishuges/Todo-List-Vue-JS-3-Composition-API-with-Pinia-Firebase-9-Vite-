@@ -17,12 +17,15 @@
         <v-btn @click="deleteNote" color="#5865f2"> Delete </v-btn>
       </v-card-actions>
     </v-card>
+    <ModalDeleteNotes v-model="modals.deleteNote" />
   </div>
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
+import { defineProps, reactive } from 'vue';
 import { computed, defineEmits } from 'vue';
+import ModalDeleteNotes from './ModalDeleteNotes.vue';
+
 const emits = defineEmits(['deleteClicked', 'editClicked']);
 // props
 const props = defineProps({
@@ -44,6 +47,10 @@ const deleteNote = () => {
 const editNote = () => {
   emits('editClicked', props.note.id);
 };
+
+const modals = reactive({
+  deleteNote: true,
+});
 </script>
 
 <style lang="scss" scoped></style>

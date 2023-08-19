@@ -40,7 +40,9 @@ const router = useRouter();
 const newNote = ref('');
 const notes = ref([]);
 const addEditNoteRef = ref(null);
+
 const storeNotes = useStoreNotes();
+useWatchCharacters(newNote);
 
 function onAddNote() {
   storeNotes.addNote(newNote.value);
@@ -57,8 +59,6 @@ const onDeleteNote = (idNote) => {
 const onEditClicked = (idNote) => {
   router.push({ name: 'editNote', params: { id: idNote } });
 };
-
-useWatchCharacters(newNote);
 </script>
 
 <style lang="css" scoped>
