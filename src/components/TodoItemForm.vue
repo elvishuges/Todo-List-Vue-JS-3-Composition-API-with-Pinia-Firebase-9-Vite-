@@ -29,6 +29,11 @@ function handleSubmit() {
     description: description.value,
   };
   emits('submit', payload);
+  cleanForm();
+}
+function cleanForm() {
+  title.value = '';
+  description.value = '';
 }
 </script>
 

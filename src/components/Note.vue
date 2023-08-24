@@ -17,7 +17,10 @@
         <v-btn @click="deleteNote" color="#5865f2"> Delete </v-btn>
       </v-card-actions>
     </v-card>
-    <ModalDeleteNotes v-model="modals.deleteNote" />
+    <ModalDeleteNotes
+      v-model="modals.deleteNote"
+      @deleteNote="ondeleteNoteModalComfirm"
+    />
   </div>
 </template>
 
@@ -42,14 +45,17 @@ const characteresLength = computed(() => {
 });
 
 const deleteNote = () => {
-  emits('deleteClicked', props.note.id);
+  modals.deleteNote = true;
 };
 const editNote = () => {
   emits('editClicked', props.note.id);
 };
+const ondeleteNoteModalComfirm = () => {
+  emits('deleteClicked', props.note.id);
+};
 
 const modals = reactive({
-  deleteNote: true,
+  deleteNote: false,
 });
 </script>
 

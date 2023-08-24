@@ -9,7 +9,8 @@
         <div class="pl-10 pr-10">Deseja realmente deletar este item!?</div>
       </v-card-text>
       <v-card-actions class="justify-end">
-        <v-btn variant="text" @click="closeDialog">Deletar</v-btn>
+        <v-btn variant="text" @click="onCancelClick">Cancelar</v-btn>
+        <v-btn variant="text" @click="onDeleteClick">Deletar</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -17,7 +18,7 @@
 
 <script setup>
 import { defineProps, defineEmits } from 'vue';
-const emit = defineEmits(['update:ModalValue']);
+const emit = defineEmits(['update:ModalValue', 'deleteNote']);
 
 const props = defineProps({
   modelValue: {
@@ -27,7 +28,10 @@ const props = defineProps({
   },
 });
 
-function closeDialog() {
+function onDeleteClick() {
+  emit('deleteNote');
+}
+function onCancelClick() {
   emit('update:modelValue', false);
 }
 </script>

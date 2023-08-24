@@ -45,6 +45,7 @@ onMounted(() => {
     return;
   }
   alert('Nota Não Encontrada');
+  router.push('/notes');
 });
 
 function getStoreNoteById(idNote) {
