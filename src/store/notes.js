@@ -1,4 +1,6 @@
 import { defineStore } from 'pinia';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '@/js/firebase';
 
 export const useStoreNotes = defineStore('notes', {
   state: () => ({
@@ -6,6 +8,18 @@ export const useStoreNotes = defineStore('notes', {
     notes: [],
   }),
   actions: {
+    async getNotes() {
+      const querySnapshot = await getDocs(collection(db, 'notes'));
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, ' => ', doc.data());
+        let note = {
+          id: doc.id,
+          content: doc.data().content,
+        };
+        this.notes.push(note);
+      });
+    },
     updateNoteTitles(title) {
       this.title = title;
     },

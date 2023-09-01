@@ -48,13 +48,20 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { navbarItens } from './contants/navigations';
+import { useStoreNotes } from '@/store/notes';
 
 const router = useRouter();
 const drawer = ref(false);
 const items = ref(navbarItens);
+
+const storeNotes = useStoreNotes();
+
+onMounted(() => {
+  storeNotes.getNotes();
+});
 </script>
 
 <style scoped>
