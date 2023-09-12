@@ -14,14 +14,25 @@
         </v-btn></template
       >
     </AddEditNote>
-
-    <Note
-      v-for="note in storeNotes.notes"
-      :note="note"
-      :key="note.id"
-      @deleteClicked="onDeleteNote"
-      @editClicked="onEditClicked"
-    />
+    <v-progress-linear
+      v-if="!storeNotes.notesLoaded"
+      color="deep-purple-accent-4"
+      indeterminate
+      rounded
+      height="6"
+    ></v-progress-linear>
+    <div v-else>
+      <Note
+        v-for="note in storeNotes.notes"
+        :note="note"
+        :key="note.id"
+        @deleteClicked="onDeleteNote"
+        @editClicked="onEditClicked"
+      />
+    </div>
+    <div class="text-center text-disabled" v-if="!storeNotes.notes.length">
+      Não há notas aqui...
+    </div>
   </v-container>
 </template>
 

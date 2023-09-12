@@ -6,8 +6,8 @@
           {{ note.content }}
         </div>
       </v-card-text>
-      <div class="d-flex pr-3 justify-space-between">
-        <v-list-item-subtitle></v-list-item-subtitle>
+      <div class="d-flex pl-4 pr-3 justify-space-between">
+        <v-list-item-subtitle>{{ dateFormated }}</v-list-item-subtitle>
         <v-list-item-subtitle>{{ characteresLength }}</v-list-item-subtitle>
       </div>
 
@@ -27,6 +27,7 @@
 <script setup>
 import { defineProps, reactive } from 'vue';
 import { computed, defineEmits } from 'vue';
+import { useNow, useDateFormat } from '@vueuse/core';
 import ModalDeleteNotes from './ModalDeleteNotes.vue';
 
 const emits = defineEmits(['deleteClicked', 'editClicked']);
@@ -44,6 +45,12 @@ const characteresLength = computed(() => {
   return `${length} ${description}`;
 });
 
+const dateFormated = computed(() => {
+  let date = new Date(parseInt(props.note.date));
+  let formattedDate = useDateFormat(date, 'DD-MM-YYYY HH:mm');
+  return formattedDate.value;
+});
+
 const deleteNote = () => {
   modals.deleteNote = true;
 };
@@ -57,6 +64,10 @@ const ondeleteNoteModalComfirm = () => {
 const modals = reactive({
   deleteNote: false,
 });
+
+/**
+ * date formatted
+ */
 </script>
 
 <style lang="scss" scoped></style>

@@ -6,28 +6,37 @@ import {
   setDoc,
   deleteDoc,
   updateDoc,
+  query,
+  orderBy,
+  addDoc,
 } from 'firebase/firestore';
 import { db } from '@/js/firebase';
 
 const notesCollectionRef = collection(db, 'notes');
+const notesCollectionQuery = query(notesCollectionRef, orderBy('date', 'desc'));
 
 export const useStoreNotes = defineStore('notes', {
   state: () => ({
     title: 'My Notes',
     notes: [],
+    notesLoaded: false,
   }),
   actions: {
     async getNotes() {
-      onSnapshot(notesCollectionRef, (querySnapshot) => {
+      this.notesLoaded = false;
+      onSnapshot(notesCollectionQuery, (querySnapshot) => {
         const notes = [];
         querySnapshot.forEach((doc) => {
           let note = {
             id: doc.id,
             content: doc.data().content,
+            date: doc.data().date,
           };
           notes.push(note);
         });
+
         this.notes = notes;
+        this.notesLoaded = true;
       });
     },
     updateNoteTitles(title) {
@@ -41,10 +50,14 @@ export const useStoreNotes = defineStore('notes', {
     },
     async addNote(newNoteContent) {
       let currentDate = new Date().getTime(),
-        id = currentDate.toString();
+        date = currentDate.toString();
 
-      await setDoc(doc(notesCollectionRef, id), { content: newNoteContent });
+      await addDoc(notesCollectionRef, {
+        content: newNoteContent,
+        date: date,
+      });
     },
+
     async deleteNote(idToDelete) {
       await deleteDoc(doc(notesCollectionRef, idToDelete));
     },
