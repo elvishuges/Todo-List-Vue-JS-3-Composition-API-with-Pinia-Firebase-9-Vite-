@@ -64,10 +64,6 @@ const ondeleteNoteModalComfirm = () => {
 const modals = reactive({
   deleteNote: false,
 });
-
-/**
- * date formatted
- */
 </script>
 
 <style lang="scss" scoped></style>

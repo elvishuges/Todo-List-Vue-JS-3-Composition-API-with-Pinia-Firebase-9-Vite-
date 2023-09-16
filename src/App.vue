@@ -20,6 +20,9 @@
         <v-btn @click="router.push('/')" target="_blank" text>
           <span class="mr-2">Home</span>
         </v-btn>
+        <v-btn @click="router.push('/notes')" target="_blank" text>
+          <span class="mr-2">Logout</span>
+        </v-btn>
       </div>
     </v-app-bar>
     <v-navigation-drawer
@@ -41,7 +44,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-main>
+    <v-main class="main">
       <router-view />
     </v-main>
   </v-app>
@@ -62,6 +65,10 @@ const storeNotes = useStoreNotes();
 onMounted(() => {
   storeNotes.getNotes();
 });
+
+const onLogoutClick = () => {
+  console.log('logout');
+};
 </script>
 
 <style scoped>
