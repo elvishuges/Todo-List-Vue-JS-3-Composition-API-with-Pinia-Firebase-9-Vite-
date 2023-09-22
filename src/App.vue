@@ -20,7 +20,12 @@
         <v-btn @click="router.push('/')" target="_blank" text>
           <span class="mr-2">Home</span>
         </v-btn>
-        <v-btn @click="router.push('/notes')" target="_blank" text>
+        <v-btn
+          v-if="storeAuth.user.id"
+          @click="onLogoutClick()"
+          target="_blank"
+          text
+        >
           <span class="mr-2">Logout</span>
         </v-btn>
       </div>
@@ -29,17 +34,22 @@
       v-model="drawer"
       location="top"
       temporary
-      style="height: 180px"
+      style="height: 230px"
     >
       <v-list nav dense>
         <v-list-item
           @click="router.push(item.toRoute)"
           v-bind:key="index"
-          v-for="(item, index) in items"
+          v-for="(item, index) in navbarItemsApp"
         >
           <v-list-item-title class="v-list-item-title">{{
             item.title
           }}</v-list-item-title>
+        </v-list-item>
+        <v-list-item v-if="storeAuth.user.id">
+          <v-list-item-title @click="onLogoutClick()" class="v-list-item-title">
+            logout
+          </v-list-item-title>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
@@ -53,21 +63,23 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { navbarItens } from './contants/navigations';
+import { navbarItems } from './contants/navigations';
 import { useStoreNotes } from '@/store/notes';
+import { useStoreAuth } from './store/auth';
 
 const router = useRouter();
 const drawer = ref(false);
-const items = ref(navbarItens);
+const navbarItemsApp = ref(navbarItems);
 
 const storeNotes = useStoreNotes();
+const storeAuth = useStoreAuth();
 
 onMounted(() => {
-  storeNotes.getNotes();
+  storeAuth.init();
 });
 
 const onLogoutClick = () => {
-  console.log('logout');
+  storeAuth.logoutUser();
 };
 </script>
 

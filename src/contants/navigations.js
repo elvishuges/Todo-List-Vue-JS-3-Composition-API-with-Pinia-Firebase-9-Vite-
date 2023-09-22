@@ -1,4 +1,4 @@
-export const navbarItens = [
+export const navbarItems = [
   {
     title: 'Notes',
     toRoute: '/notes',

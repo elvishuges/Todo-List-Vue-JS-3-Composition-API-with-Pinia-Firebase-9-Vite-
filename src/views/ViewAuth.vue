@@ -20,6 +20,7 @@
             <v-text-field
               v-model="creadentials.password"
               label="Senha"
+              type="password"
             ></v-text-field>
             <v-btn
               block
@@ -40,7 +41,10 @@
 
 <script setup>
 import { ref, computed, reactive } from 'vue';
+import { useStoreAuth } from './../store/auth';
 const tab = ref('');
+
+const storeAuth = useStoreAuth();
 
 const formTitle = computed(() => (tab.value == 'login' ? 'Login' : 'Cadastro'));
 const onsubmit = () => {
@@ -48,16 +52,16 @@ const onsubmit = () => {
     alert('Adicione email e senha');
   } else {
     if (tab.value == 'register') {
-      console.log('Register User', creadentials);
+      storeAuth.registerUser(creadentials);
     } else {
-      console.log('Login User', creadentials);
+      storeAuth.loginUser(creadentials);
     }
   }
 };
 
 const creadentials = reactive({
-  email: '123',
-  password: '123123',
+  email: '',
+  password: '',
 });
 </script>
 
