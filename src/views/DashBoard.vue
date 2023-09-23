@@ -35,11 +35,19 @@
 </template>
 
 <script setup>
+import { ref, watch, onMounted } from 'vue';
 import { useTodo } from '@/store/todo';
 import { useRouter } from 'vue-router';
+import { useStoreNotes } from '@/store/notes';
+
+const storeNotes = useStoreNotes();
 
 const todoState = useTodo();
 const router = useRouter();
+
+onMounted(() => {
+  storeNotes.init();
+});
 
 function goToKaban() {
   router.push('/kaban');

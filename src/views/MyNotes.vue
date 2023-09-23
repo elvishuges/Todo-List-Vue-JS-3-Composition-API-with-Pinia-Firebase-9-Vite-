@@ -38,7 +38,7 @@
 
 <script setup>
 // imports
-import { ref, watch } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import Note from './../components/Note.vue';
 import AddEditNote from './../components/AddEditNote.vue';
