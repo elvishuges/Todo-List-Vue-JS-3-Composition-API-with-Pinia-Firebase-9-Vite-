@@ -20,12 +20,7 @@
         <v-btn @click="router.push('/')" target="_blank" text>
           <span class="mr-2">Home</span>
         </v-btn>
-        <v-btn
-          v-if="storeAuth.user.id"
-          @click="onLogoutClick()"
-          target="_blank"
-          text
-        >
+        <v-btn @click="onLogoutClick()" target="_blank" text>
           <span class="mr-2">Logout</span>
         </v-btn>
       </div>
@@ -61,7 +56,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { navbarItems } from './contants/navigations';
 import { useStoreNotes } from '@/store/notes';
@@ -73,10 +68,6 @@ const navbarItemsApp = ref(navbarItems);
 
 const storeNotes = useStoreNotes();
 const storeAuth = useStoreAuth();
-
-onMounted(() => {
-  storeAuth.init();
-});
 
 const onLogoutClick = () => {
   storeAuth.logoutUser();

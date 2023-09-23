@@ -25,6 +25,7 @@ export const useStoreNotes = defineStore('notes', {
     init() {
       const storeAuth = useStoreAuth();
       const userId = storeAuth.user.id;
+      console.log('User id', storeAuth.user.id);
       notesCollectionRef = collection(db, 'users', userId, 'notes');
       notesCollectionQuery = query(notesCollectionRef, orderBy('date', 'desc'));
       this.getNotes();
@@ -46,6 +47,9 @@ export const useStoreNotes = defineStore('notes', {
         this.notes = notes;
         this.notesLoaded = true;
       });
+    },
+    clearNotes() {
+      this.note = [];
     },
     updateNoteTitles(title) {
       this.title = title;

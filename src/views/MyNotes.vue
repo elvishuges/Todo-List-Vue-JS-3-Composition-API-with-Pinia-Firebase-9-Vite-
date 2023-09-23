@@ -43,7 +43,14 @@ import { useRouter } from 'vue-router';
 import Note from './../components/Note.vue';
 import AddEditNote from './../components/AddEditNote.vue';
 import { useStoreNotes } from '@/store/notes';
+import { useStoreAuth } from '@/store/auth';
 import useWatchCharacters from './../composable/useWatchCharacters.js';
+
+const storeAuth = useStoreAuth();
+
+onMounted(() => {
+  storeAuth.init();
+});
 
 const router = useRouter();
 
@@ -60,8 +67,6 @@ function onAddNote() {
   newNote.value = '';
   addEditNoteRef.value.focusTextarea();
 }
-
-// delete notes
 
 const onDeleteNote = (idNote) => {
   storeNotes.deleteNote(idNote);

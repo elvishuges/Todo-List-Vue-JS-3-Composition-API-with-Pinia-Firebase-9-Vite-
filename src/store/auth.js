@@ -14,21 +14,22 @@ export const useStoreAuth = defineStore('storeAuth', {
     user: {},
   }),
   actions: {
-    init() {
-      //const storeNotes = useStoreNotes();
+    async init() {
+      console.log('111');
+      const storeNotes = useStoreNotes();
       onAuthStateChanged(auth, (user) => {
+        console.log('changes', user);
         if (user) {
+          console.log('User', user);
           this.user.id = user.uid;
           this.user.email = user.email;
-          //storeNotes.init();
-          this.router.push('/');
-          // storeNotes.init();
+          this.router.push('/notes');
+          storeNotes.init();
         } else {
-          // User is signed out
           console.log('logout', user);
-          // ...
           this.user = {};
           this.router.replace('/auth');
+          storeNotes.clearNotes();
         }
       });
     },
