@@ -40,11 +40,16 @@
 </template>
 
 <script setup>
-import { ref, computed, reactive } from 'vue';
-import { useStoreAuth } from './../store/auth';
+import { ref, computed, reactive, onMounted } from 'vue';
+import { useStoreAuth } from '@/store/auth';
+
 const tab = ref('');
 
 const storeAuth = useStoreAuth();
+
+onMounted(() => {
+  storeAuth.init();
+});
 
 const formTitle = computed(() => (tab.value == 'login' ? 'Login' : 'Cadastro'));
 const onsubmit = () => {

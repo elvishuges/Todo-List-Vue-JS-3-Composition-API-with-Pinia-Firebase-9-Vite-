@@ -6,7 +6,7 @@ import EditNote from '../views/EditNote.vue';
 import ViewAuth from '../views/ViewAuth.vue';
 
 const routes = [
-  { path: '/', name: 'Dashboard', component: DashBoard },
+  { path: '/', name: 'dashboard', component: DashBoard },
   { path: '/kaban', name: 'kaban', component: KabanPage },
   { path: '/home', name: 'home', component: HomePage },
   { path: '/notes', name: 'notes', component: MyNotes },
