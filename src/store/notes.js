@@ -14,6 +14,7 @@ import { db } from '@/js/firebase';
 
 let notesCollectionRef;
 let notesCollectionQuery;
+let getNotesSnapshots = null;
 
 export const useStoreNotes = defineStore('notes', {
   state: () => ({
@@ -33,7 +34,8 @@ export const useStoreNotes = defineStore('notes', {
 
     async getNotes() {
       this.notesLoaded = false;
-      onSnapshot(notesCollectionQuery, (querySnapshot) => {
+      if (getNotesSnapshots) getNotesSnapshots(); // unsubscribe froma ny active listener
+      getNotesSnapshots = onSnapshot(notesCollectionQuery, (querySnapshot) => {
         const notes = [];
         querySnapshot.forEach((doc) => {
           let note = {
